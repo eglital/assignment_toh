@@ -1,14 +1,3 @@
-# Welcome to Tower of Hanoi!
-# Instructions:
-# Enter where you'd like to move from and to
-# in the format '1,3'. Enter 'q' to quit.
-# Current Board:
-# o
-# oo
-# ooo
-# 1    2    3
-# Enter move >
-# ...
 class TowerofHanoi
   def initialize(height)
     @towers = height
@@ -89,7 +78,7 @@ class TowerofHanoi
     puts "Enter where you'd like to move from and to in the format '1,3'. Enter 'q' to quit."
     render
 
-    until check_win? 
+    until check_win?
 
       get_user_input
 
@@ -98,11 +87,9 @@ class TowerofHanoi
       render
 
     end
+
     puts "Congratulations! You won!"
     exit
   end
 
 end
-
-t = TowerofHanoi.new(4)
-t.play
