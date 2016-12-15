@@ -53,9 +53,9 @@ class TowerofHanoi
   end
 
   def get_user_input
-    until is_valid?
+    until @player_input.length > 0 && is_valid?
       puts "Enter move: "
-      puts "> "
+      print "> "
       @player_input = gets.chomp
     end
   end
