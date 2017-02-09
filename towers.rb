@@ -33,16 +33,18 @@ class TowerofHanoi
       puts "Please enter the move in the format '1,3'."
       return false
     end
+    @disk_from = @player_move[0] - 1
+    @disk_to = @player_move[1] - 1
     if @player_move.all?{ |item| item >= 1 && item <= 3 }
-      if @board[@player_move[1] - 1].empty?
-        return true
-      elsif @board[@player_move[0]-1].empty?
+      if @board[@disk_from].empty?
         puts "You can not move a disk from an empty column."
         return false
-      elsif @board[@player_move[1]-1][0] == @board[@player_move[0]-1][0]
+      elsif @board[@disk_to].empty?
+        return true
+      elsif @disk_to == @disk_from
         puts "Moving from the same column to the same one doesn't change anything"
         return false
-      elsif @board[@player_move[1]-1][0] > @board[@player_move[0]-1][0]
+      elsif @board[@disk_to][0] > @board[@disk_from][0]
         return true
       else
         puts "Larger disk can not go on top of the smaller disk. Please re-enter your move."
@@ -63,11 +65,11 @@ class TowerofHanoi
   end
 
   def move
-    @board[@player_move[1]-1].unshift(@board[@player_move[0]-1].shift)
+    @board[@disk_to].unshift(@board[@disk_from].shift)
     @player_move = ""
   end
 
-  def check_win?
+  def win?
     @board[1] == @original || @board[2] == @original
   end
 
@@ -78,7 +80,7 @@ class TowerofHanoi
     puts "Enter where you'd like to move from and to in the format '1,3'. Enter 'q' to quit."
     render
 
-    until check_win?
+    until win?
 
       get_user_input
 
@@ -93,3 +95,5 @@ class TowerofHanoi
   end
 
 end
+
+TowerofHanoi.new(3).play
